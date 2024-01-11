@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Pull Request Merge Watcher
 
 # Controls when the workflow will run
 on:
@@ -24,7 +24,7 @@ jobs:
             payload: |
               {
                 "pull_request_url": ${{ github.event.pull_request.html_url }},
-                "user_name": ${{ github.event.pull_request.merged_by.name }}
+                "user_name": ${{ github.event.pull_request.merged_by.html_url }}
               }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
