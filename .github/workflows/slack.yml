@@ -6,7 +6,7 @@ name: Pull Request Merge Watcher
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   pull_request:
-    types: ["closed"]
+    types: [closed]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -24,8 +24,6 @@ jobs:
             payload: |
               {
                 "pull_request_url": "${{ github.event.pull_request.html_url }}",
-                "merge_user_email": "${{ github.event.pull_request.merged_by.email }}",
-                "test": "${{ github.event.pull_request.url }}"
-              }
+                "merge_user_email": "${{ github.event.pull_request.merged_by.email }}"              }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
