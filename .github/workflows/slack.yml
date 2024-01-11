@@ -27,7 +27,7 @@ jobs:
                 "pull_request_url": "${{ github.event.pull_request.html_url }}",
                 "merge_user_url": "${{ github.event.pull_request.merged_by.html_url }}",
                 "merge_user_name": "${{ github.event.pull_request.merged_by.name || 'Unknown user' }}",
-                "title": "${{ github.event.pull_request.title }}",
+                "title": ${{ toJSON(github.event.pull_request.title) }},
                 "repository": "${{ github.repository }}"
               }
         env:
