@@ -26,6 +26,9 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
         with:
-            payload: ${{ <context> }}
+            payload: |
+              {
+                "context": ${{ <context> }},
+              }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
