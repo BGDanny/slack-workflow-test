@@ -28,7 +28,7 @@ jobs:
         with:
             payload: |
               {
-                "context": "${{ toJSON(github) }}",
+                "context": "${{ toJSON(github.event) }}",
               }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
