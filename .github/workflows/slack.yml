@@ -28,7 +28,7 @@ jobs:
                 "merge_user_url": "${{ github.event.pull_request.merged_by.html_url }}",
                 "merge_user_name": "${{ github.event.pull_request.merged_by.name || 'Unknown user' }}",
                 "title": "${{ github.event.pull_request.title }}",
-                "repository": "${{ github.event.repository }}"
+                "repository": "${{ github.repository }}"
               }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
