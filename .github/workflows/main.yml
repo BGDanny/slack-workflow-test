@@ -40,7 +40,6 @@ jobs:
               					"elements": [
               						{
               							"type": "text",
-                            # Escape quotes in PR titles https://github.com/slackapi/slack-github-action/issues/202#issuecomment-1769132156
               							"text": ${{ toJSON(github.event.pull_request.title) }},
               							"style": {
               								"bold": true
@@ -59,7 +58,6 @@ jobs:
               				},
               				{
               					"type": "mrkdwn",
-                        # Name is an optional field from GitHub API, thus GitHub user is the fallback
               					"text": "*Merged by:*\n<${{ github.event.pull_request.merged_by.html_url }}|${{ github.event.pull_request.merged_by.name || 'GitHub user' }}>"
               				}
               			]
