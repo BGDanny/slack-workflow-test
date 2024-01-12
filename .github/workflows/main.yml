@@ -25,16 +25,50 @@ jobs:
             channel-id: 'C06CWCGLMAT'
             payload: |
               {
-                "text": "Test",
-                "blocks": [
-                  {
-                    "type": "section",
-                    "text": {
-                      "type": "mrkdwn",
-                      "text": "[${{ github.repository }}] Pull request closed by <${{ github.event.pull_request.merged_by.html_url }}|${{ github.event.pull_request.merged_by.name || 'GitHub user' }}>"
-                    }
-                  }
-                ]
+              	"blocks": [
+              		{
+              			"type": "header",
+              			"text": {
+              				"type": "plain_text",
+              				"text": ":tada: Pull Request Merged"
+              			}
+              		},
+              		{
+              			"type": "section",
+              			"fields": [
+              				{
+              					"type": "mrkdwn",
+              					"text": "*Title:*\n${{ toJSON(github.event.pull_request.title) }}"
+              				},
+              				{
+              					"type": "mrkdwn",
+              					"text": "*Repository:*\n<${{ github.repositoryUrl }}|${{ github.repository }}>"
+              				},
+              				{
+              					"type": "mrkdwn",
+              					"text": "*Created by:*\n<${{ github.event.pull_request.user.html_url }}|${{ github.event.pull_request.user.name || 'Unknown user' }}>"
+              				},
+              				{
+              					"type": "mrkdwn",
+              					"text": "*Closed by:*\n<${{ github.event.pull_request.merged_by.html_url }}|${{ github.event.pull_request.merged_by.name || 'Unknown user' }}>"
+              				}
+              			]
+              		},
+              		{
+              			"type": "actions",
+              			"elements": [
+              				{
+              					"type": "button",
+              					"style": "primary",
+              					"text": {
+              						"type": "plain_text",
+              						"text": "View Pull Request"
+              					},
+              					"url": "${{ github.event.pull_request.html_url }}"
+              				}
+              			]
+              		}
+              	]
               }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
