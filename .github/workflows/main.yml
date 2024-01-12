@@ -27,7 +27,7 @@ jobs:
               {
               	"blocks": [
               		{
-              			"type": "header",
+              			"type": "section",
               			"text": {
               				"type": "plain_text",
               				"text": ":tada: Pull Request Merged"
