@@ -1,17 +1,16 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Pull Request Merge Watcher - Slackbot
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
+  # Triggers the workflow on pull request closed event
   pull_request:
     types:
       - closed
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  # This workflow contains a single job called "if_merged"
   if_merged:
+    # Run only if PR is merged not declined
     if: github.event.pull_request.merged == true
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -41,6 +40,7 @@ jobs:
               					"elements": [
               						{
               							"type": "text",
+                            # Escape quotes in PR titles https://github.com/slackapi/slack-github-action/issues/202#issuecomment-1769132156
               							"text": ${{ toJSON(github.event.pull_request.title) }},
               							"style": {
               								"bold": true
@@ -59,6 +59,7 @@ jobs:
               				},
               				{
               					"type": "mrkdwn",
+                        # Name is an optional field from GitHub API, thus GitHub user is the fallback
               					"text": "*Merged by:*\n<${{ github.event.pull_request.merged_by.html_url }}|${{ github.event.pull_request.merged_by.name || 'GitHub user' }}>"
               				}
               			]
