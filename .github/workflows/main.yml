@@ -31,7 +31,7 @@ jobs:
                     "type": "section",
                     "text": {
                       "type": "mrkdwn",
-                      "text": "[${{ github.repository }}] Pull request closed by <${{ github.event.pull_request.merged_by.html_url }}|${{ github.event.pull_request.merged_by.name || 'Unknown user' }}>"
+                      "text": "[${{ github.repository }}] Pull request closed by <${{ github.event.pull_request.merged_by.html_url }}|${{ github.event.pull_request.merged_by.name || 'Github user' }}>"
                     }
                   }
                 ]
