@@ -34,11 +34,19 @@ jobs:
               			}
               		},
                   {
-              			"type": "context",
+              			"type": "rich_text",
               			"elements": [
               				{
-              					"type": "plain_text",
-              					"text": ${{ toJSON(github.event.pull_request.title) }}
+              					"type": "rich_text_section",
+              					"elements": [
+              						{
+              							"type": "text",
+              							"text": ${{ toJSON(github.event.pull_request.title) }},
+              							"style": {
+              								"bold": true
+              							}
+              						}
+              					]
               				}
               			]
               		},
@@ -47,7 +55,7 @@ jobs:
               			"fields": [
               				{
               					"type": "mrkdwn",
-              					"text": "*Repository:*\n<${{ github.repositoryUrl }}|${{ github.repository }}>"
+              					"text": "*Repository:*\n${{ github.repository }}"
               				},
               				{
               					"type": "mrkdwn",
