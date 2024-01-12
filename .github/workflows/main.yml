@@ -33,24 +33,25 @@ jobs:
               				"text": ":tada: Pull Request Merged"
               			}
               		},
+                  {
+              			"type": "context",
+              			"elements": [
+              				{
+              					"type": "plain_text",
+              					"text": ${{ toJSON(github.event.pull_request.title) }}
+              				}
+              			]
+              		},
               		{
               			"type": "section",
               			"fields": [
-              				{
-              					"type": "mrkdwn",
-              					"text": "*Title:*\n${{ toJSON(github.event.pull_request.title) }}"
-              				},
               				{
               					"type": "mrkdwn",
               					"text": "*Repository:*\n<${{ github.repositoryUrl }}|${{ github.repository }}>"
               				},
               				{
               					"type": "mrkdwn",
-              					"text": "*Created by:*\n<${{ github.event.pull_request.user.html_url }}|${{ github.event.pull_request.user.name || 'Unknown user' }}>"
-              				},
-              				{
-              					"type": "mrkdwn",
-              					"text": "*Closed by:*\n<${{ github.event.pull_request.merged_by.html_url }}|${{ github.event.pull_request.merged_by.name || 'Unknown user' }}>"
+              					"text": "*Merged by:*\n<${{ github.event.pull_request.merged_by.html_url }}|${{ github.event.pull_request.merged_by.name || 'GitHub user' }}>"
               				}
               			]
               		},
