@@ -1,0 +1,21 @@
+name: Pull Request Merge Watcher Caller
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on pull request closed event
+  pull_request:
+    types:
+      - closed
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "if_merged"
+  if_merged:
+    # Run only if PR is merged not declined
+    if: github.event.pull_request.merged == true
+    uses: ./.github/workflows/main.yml
+    with:
+      pull-request-title: ${{ github.event.pull_request.title }}
+      pull-request-url: ${{ github.event.pull_request.html_url }}
+      merge-user-url: ${{ github.event.pull_request.merged_by.html_url }}
+      merge-user-name: ${{ github.event.pull_request.merged_by.name }}
+      repo-name: ${{ github.repository }}
