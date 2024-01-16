@@ -1,17 +1,27 @@
-name: Pull Request Merge Watcher - Slackbot
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on pull request closed event
-  pull_request:
-    types:
-      - closed
+  workflow_call:
+    inputs:
+      pull-request-title:
+        required: true
+        type: string
+      pull-request-url:
+        required: true
+        type: string
+      merge-user-url:
+        required: true
+        type: string
+      merge-user-name:
+        required: false
+        type: string
+        default: 'GitHub User'
+      repo-name:
+        required: true
+        type: string
+      
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "if_merged"
-  if_merged:
-    # Run only if PR is merged not declined
-    if: github.event.pull_request.merged == true
+  # This workflow contains a single job called "notify_slack"
+  notify_slack:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -40,7 +50,7 @@ jobs:
               					"elements": [
               						{
               							"type": "text",
-              							"text": ${{ toJSON(github.event.pull_request.title) }},
+              							"text": ${{ toJSON(inputs.pull-request-title) }},
               							"style": {
               								"bold": true
               							}
@@ -54,11 +64,11 @@ jobs:
               			"fields": [
               				{
               					"type": "mrkdwn",
-              					"text": "*Repository:*\n${{ github.repository }}"
+              					"text": "*Repository:*\n${{ inputs.repo-name }}"
               				},
               				{
               					"type": "mrkdwn",
-              					"text": "*Merged by:*\n<${{ github.event.pull_request.merged_by.html_url }}|${{ github.event.pull_request.merged_by.name || 'GitHub user' }}>"
+              					"text": "*Merged by:*\n<${{ inputs.merge-user-url }}|${{ inputs.merge-user-name }}>"
               				}
               			]
               		},
@@ -72,7 +82,7 @@ jobs:
               						"type": "plain_text",
               						"text": "View Pull Request"
               					},
-              					"url": "${{ github.event.pull_request.html_url }}"
+              					"url": "${{ inputs.pull-request-url }}"
               				}
               			]
               		}
