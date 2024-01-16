@@ -36,6 +36,7 @@ jobs:
             channel-id: 'C06CWCGLMAT'
             payload: |
               {
+                "text": "Pull Request Merged ${{ inputs.pull-request-url }}"
               	"blocks": [
               		{
               			"type": "section",
