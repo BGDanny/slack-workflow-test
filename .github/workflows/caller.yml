@@ -17,6 +17,6 @@ jobs:
       pull-request-title: ${{ github.event.pull_request.title }}
       pull-request-url: ${{ github.event.pull_request.html_url }}
       merge-user-url: ${{ github.event.pull_request.merged_by.html_url }}
-      merge-user-name: ${{ github.event.pull_request.merged_by.name || 'null' }}
+      merge-user-name: ${{ github.event.pull_request.merged_by.name }}
       repo-name: ${{ github.repository }}
     secrets: inherit
