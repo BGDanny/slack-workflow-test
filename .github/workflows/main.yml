@@ -13,9 +13,8 @@ on:
         required: true
         type: string
       merge-user-name:
-        required: false
+        required: true
         type: string
-        default: 'GitHub User'
       repo-name:
         required: true
         type: string
@@ -71,7 +70,7 @@ jobs:
               				},
               				{
               					"type": "mrkdwn",
-              					"text": "*Merged by:*\n<${{ inputs.merge-user-url }}|${{ inputs.merge-user-name }}>"
+              					"text": "*Merged by:*\n<${{ inputs.merge-user-url }}|${{ inputs.merge-user-name || 'GitHub User' }}>"
               				}
               			]
               		},
